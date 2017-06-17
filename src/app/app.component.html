@@ -1,3 +1,43 @@
-<h1>
-  {{title}}
-</h1>
+<link href="<c:url value='/resources/css/home.css'/>" rel="stylesheet" type="text/css">
+
+<div id="container" ng-controller="loginCtrl">
+
+  <div id="form">
+    <form (submit)="addUser(username.value, mail.value)">
+      <label for="username">username: </label>
+      <input type="text" id="username" name="username" #username>
+
+      <label for="mail">mail: </label>
+      <input type="text" id="mail" name="mail" #mail><br>
+
+      <input type="submit" value="add user" (submit)="addUser(username.value, mail.value)">
+    </form>
+  </div>
+
+  <!--<form (submit)="addHobby(hobby.value)">-->
+    <!--<label for="hobby">Add hobby</label>-->
+    <!--<input type="text" name="hobby" id="hobby" #hobby>-->
+    <!--<input type="submit" name="add" value="add" (submit)="addHobby(hobby.value)">-->
+  <!--</form>-->
+
+  <div id="table">
+    <table>
+      <thead>
+      <tr>
+        <td>username</td>
+        <td>mail</td>
+        <td></td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let entry of users | keys">
+        <td><span>{{entry.value.username}}</span></td>
+        <td><span>{{entry.value.mail}}</span></td>
+        <td><button id="delete" (click)="deleteUser(entry.value.username)">delete</button></td>
+        <!--<%&#45;&#45;<td><input type="submit" value="update" id="update" ng-click="delete(value.username)"></td>&#45;&#45;%>-->
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
