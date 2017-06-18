@@ -47,7 +47,16 @@ input[type=text] {
   box-sizing: border-box;
 }
 
-input[type=submit] {
+button {
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#add {
   background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
@@ -57,22 +66,22 @@ input[type=submit] {
   cursor: pointer;
 }
 
-input[type=submit]:hover {
+#add:hover {
   background-color: #45a049;
 }
 
-button {
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
 #delete {
   background-color: #af4735;
 }
 
 #delete:hover {
   background-color: #a00610;
+}
+
+#update {
+  background-color: #078baf;
+}
+
+#update:hover {
+  background-color: #0c1aa0;
 }

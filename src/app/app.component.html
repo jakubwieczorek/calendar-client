@@ -3,22 +3,16 @@
 <div id="container" ng-controller="loginCtrl">
 
   <div id="form">
-    <form (submit)="addUser(username.value, mail.value)">
+    <form (submit)="addOrUpdate(username.value, mail.value)">
       <label for="username">username: </label>
-      <input type="text" id="username" name="username" #username>
+      <input type="text" id="username" name="username" #username [(ngModel)]='inputUsername'>
 
       <label for="mail">mail: </label>
-      <input type="text" id="mail" name="mail" #mail><br>
+      <input type="text" id="mail" name="mail" #mail [(ngModel)]='inputMail'><br>
 
-      <input type="submit" value="add user" (submit)="addUser(username.value, mail.value)">
+      <button id="add" (click)="addOrUpdate(username.value, mail.value)">{{add ? "add user" : "update user"}}</button>
     </form>
   </div>
-
-  <!--<form (submit)="addHobby(hobby.value)">-->
-    <!--<label for="hobby">Add hobby</label>-->
-    <!--<input type="text" name="hobby" id="hobby" #hobby>-->
-    <!--<input type="submit" name="add" value="add" (submit)="addHobby(hobby.value)">-->
-  <!--</form>-->
 
   <div id="table">
     <table>
@@ -27,6 +21,7 @@
         <td>username</td>
         <td>mail</td>
         <td></td>
+        <td></td>
       </tr>
       </thead>
       <tbody>
@@ -34,7 +29,11 @@
         <td><span>{{entry.value.username}}</span></td>
         <td><span>{{entry.value.mail}}</span></td>
         <td><button id="delete" (click)="deleteUser(entry.value.username)">delete</button></td>
-        <!--<%&#45;&#45;<td><input type="submit" value="update" id="update" ng-click="delete(value.username)"></td>&#45;&#45;%>-->
+        <td>
+          <button id="update" (click)="update(entry.value.username, entry.value.mail)">
+            update
+          </button>
+        </td>
       </tr>
       </tbody>
     </table>

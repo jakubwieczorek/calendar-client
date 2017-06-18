@@ -26,4 +26,13 @@ export class UserService
   {
     return this.http.delete('http://localhost:8080/users/' + username).map(res => res.json());
   }
+
+  updateUser(username: string, user: User)
+  {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.put('http://localhost:8080/users/' + username, JSON.stringify(user),
+      {headers: headers}).map(res => res.json());
+  }
 }
