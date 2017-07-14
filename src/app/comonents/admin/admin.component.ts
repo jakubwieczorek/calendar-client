@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {User} from '../../model/user';
+import {current} from "codelyzer/util/syntaxKind";
 
 @Component({
   selector: 'admin',
@@ -9,71 +10,67 @@ import {User} from '../../model/user';
   providers: [UserService]
 })
 
-export class AdminComponent
+export class AdminComponent implements OnInit
 {
-
   users: User[];
-  username: string;
-  mail: string;
-  inputUsername: string;
-  inputMail: string;
   add: boolean;
+  currentUser: User;
+  usersMail: string;
 
   constructor(private _userService: UserService)
   {
-    this.retrieveUsers();
-
+    this.currentUser = {firstName: '', mail: '', password: '', surname: ''};
     this.add = true;
   }
 
-  deleteUser(username: string)
+  ngOnInit() : void
   {
-    this._userService.deleteUser(username).subscribe();
+    this.retrieveUsers();
+  }
+
+  deleteUser(aMail: string)
+  {
+    this._userService.deleteUser(aMail).subscribe(user => this.retrieveUsers());
 
     this.retrieveUsers();
   }
 
-  addOrUpdate(username: string, mail: string)
+  addOrUpdate(firstName: string, mail: string, password: string, surname: string)
   {
-    let user: User = {username: username, mail: mail};
+    let user: User = {firstName: firstName, mail: mail, password: password, surname: surname};
 
     if(this.add)
     {
-      this._userService.addUser(user).subscribe();
+      this._userService.addUser(user).subscribe(user => this.retrieveUsers());
     } else
     {
-      this._userService.updateUser(username, user).subscribe();
+      this._userService.updateUser(this.usersMail, user).subscribe(user => this.retrieveUsers());
 
-      this.inputUsername = '';
-      this.inputMail = '';
+      this.clearUser();
 
       this.add = true;
     }
+  }
 
-    this.retrieveUsers();
+  private clearUser()
+  {
+    this.currentUser = {firstName: '', mail: '', password: '', surname: ''};
   }
 
   retrieveUsers()
   {
-    this._userService.getUsers().subscribe(users =>
-    {
-      this.users = users;
-    });
+    this._userService.getUsers().subscribe(users => this.users = users);
   }
 
-  update(username: string, mail: string)
+  update(firstName: string, mail: string, password: string, surname: string)
   {
     this.add = false;
 
-    this.inputMail = mail;
-    this.inputUsername = username;
-  }
+    this.currentUser.firstName = firstName;
+    this.currentUser.mail = mail;
+    this.currentUser.password = password;
+    this.currentUser.surname = surname;
 
-  get userService(): UserService {
-    return this._userService;
-  }
-
-  set userService(value: UserService) {
-    this._userService = value;
+    this.usersMail = mail;
   }
 }

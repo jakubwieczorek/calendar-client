@@ -1,14 +1,20 @@
 <div id="container">
 
   <div id="form">
-    <form (submit)="addOrUpdate(username.value, mail.value)">
-      <label for="username">username: </label>
-      <input type="text" id="username" name="username" #username [(ngModel)]='inputUsername'>
+    <form (submit)="addOrUpdate(firstName.value, mail.value, password.value, surname.value)">
+      <label for="firstName">first name: </label>
+      <input type="text" id="firstName" name="firstName" #firstName [(ngModel)]='currentUser.firstName'>
 
       <label for="mail">mail: </label>
-      <input type="text" id="mail" name="mail" #mail [(ngModel)]='inputMail'><br>
+      <input type="text" id="mail" name="mail" #mail [(ngModel)]='currentUser.mail'><br>
 
-      <button id="add" (click)="addOrUpdate(username.value, mail.value)">{{add ? "add user" : "update user"}}</button>
+      <label for="password">password: </label>
+      <input type="text" id="password" name="password" #password [(ngModel)]='currentUser.password'><br>
+
+      <label for="surname">surname: </label>
+      <input type="text" id="surname" name="surname" #surname [(ngModel)]='currentUser.surname'><br>
+
+      <button type="button" id="add" (click)="addOrUpdate(firstName.value, mail.value, password.value, surname.value)">{{add ? "add user" : "update user"}}</button>
     </form>
   </div>
 
@@ -16,19 +22,23 @@
     <table>
       <thead>
       <tr>
-        <td>username</td>
+        <td>first name</td>
         <td>mail</td>
+        <td>password</td>
+        <td>surname</td>
         <td></td>
         <td></td>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let entry of users | keys">
-        <td><span>{{entry.value.username}}</span></td>
+        <td><span>{{entry.value.firstName}}</span></td>
         <td><span>{{entry.value.mail}}</span></td>
-        <td><button id="delete" (click)="deleteUser(entry.value.username)">delete</button></td>
+        <td><span>{{entry.value.password}}</span></td>
+        <td><span>{{entry.value.surname}}</span></td>
+        <td><button id="delete" (click)="deleteUser(entry.value.mail)">delete</button></td>
         <td>
-          <button id="update" (click)="update(entry.value.username, entry.value.mail)">
+          <button id="update" (click)="update(entry.value.firstName, entry.value.mail, entry.value.password, entry.value.surname)">
             update
           </button>
         </td>
