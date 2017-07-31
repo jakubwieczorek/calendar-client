@@ -1,4 +1,5 @@
-// export interface LoginParams {
-//   username: string,
-//   password: string
-// }
+export interface LoginParams
+{
+  mail: string,
+  password: string
+}

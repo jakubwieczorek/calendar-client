@@ -1,19 +1,24 @@
 import {Routes, RouterModule, CanActivate} from "@angular/router";
-import {AdminComponent} from "./comonents/admin/admin.component";
-// import {LoginComponent} from "./comonents/login/login.component";
+import {AdminComponent} from "./components/admin/admin.component";
 import {ModuleWithProviders} from "@angular/core";
-// import {AuthGuard} from "./services/auth-guard";
+import {LoginComponent} from "./components/login/login.component";
+import {AuthGuard} from "./services/auth-guard";
+import {UserComponent} from "./components/user/user.component";
 
 const appRoutes: Routes =
   [
-    // {
-    //   path: '',
-    //   // component: LoginComponent
-    // },
+    {
+      path: '',
+      component: LoginComponent
+    },
     {
       path: 'admin',
-      component: AdminComponent
+      component: AdminComponent//,
       //canActivate: [AuthGuard]
+    },
+    {
+      path: 'user',
+      component: UserComponent
     }
   ];
 

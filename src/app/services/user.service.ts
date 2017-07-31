@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {User} from "../model/user";
 import 'rxjs/add/operator/map';
-import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class UserService
 {
   constructor(private http: Http) {}
 
+  private URL : string = 'http://localhost:8080/calendar/users/';
+
   getUsers()// : Observable<User>
   {
-    return this.http.get('http://localhost:8080/users/').map(res => res.json())
+    return this.http.get(this.URL).map(res => res.json())
       //.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
@@ -20,13 +21,13 @@ export class UserService
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.post('http://localhost:8080/users/', JSON.stringify(user), {headers: headers})
+    return this.http.post(this.URL, JSON.stringify(user), {headers: headers})
       .map(res => res.json());
   }
 
   deleteUser(aMail: string)
   {
-    return this.http.delete('http://localhost:8080/users/' + aMail).map(res => res.json());
+    return this.http.delete(this.URL + aMail).map(res => res.json());
   }
 
   updateUser(mail: string, user: User)
@@ -34,7 +35,7 @@ export class UserService
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.put('http://localhost:8080/users/' + mail, JSON.stringify(user),
+    return this.http.put(this.URL + mail, JSON.stringify(user),
       {headers: headers}).map(res => res.json());
   }
 }

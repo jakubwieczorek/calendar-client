@@ -1,0 +1,16 @@
+body {
+  min-height: 2000px;
+}
+
+.navbar-static-top {
+  margin-bottom: 19px;
+}
+
+table {
+  border-radius: 10px;
+}
+
+ui-datepicker
+{
+  font-size:500px;
+}

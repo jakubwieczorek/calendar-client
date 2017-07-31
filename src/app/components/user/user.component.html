@@ -1,0 +1,86 @@
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <span class="navbar-brand">Calendar</span>
+    </div>
+
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="http://localhost:1234/user/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://localhost:1234/user/#">log-out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered">
+        <thead>
+        <tr class="info">
+          <th></th>
+          <th>Monday</th>
+          <th>Tuesday</th>
+          <th>Wednesday</th>
+          <th>Thursday</th>
+          <th>Friday</th>
+          <th>Saturday</th>
+          <th>Sunday</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">1. </a>
+            <ul class="dropdown-menu">
+              <li><a>delete</a></li>
+            </ul>
+          </td>
+          <td (click)="_template = Template.INPUT">
+            <div [ngSwitch]="template">
+              <div *ngSwitchCase="Template.SPAN">
+                Meeting with Patric
+              </div>
+              <div *ngSwitchCase="Template.INPUT">
+                <input type="text" class="form-control">
+              </div>
+            </div>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+    </div><!--/.col-md-10-->
+  </div><!--/row-->
+
+  <hr />
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Event form
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-6">
+          <textarea class="form-control" rows="2" maxlength="50" placeholder="description"></textarea>
+        </div>
+        <div class="col-md-6">
+          <!--<input type="date" [(ngModel)]="date"/>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--<datetime [(ngModel)]="date""></datetime>-->
+  <datepicker [(ngModel)]="date"></datepicker>
+</div>

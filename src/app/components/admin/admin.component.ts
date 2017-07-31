@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {User} from '../../model/user';
-import {current} from "codelyzer/util/syntaxKind";
 
 @Component({
   selector: 'admin',
@@ -9,7 +8,6 @@ import {current} from "codelyzer/util/syntaxKind";
   styleUrls: ['./admin.component.css'],
   providers: [UserService]
 })
-
 export class AdminComponent implements OnInit
 {
   users: User[];
