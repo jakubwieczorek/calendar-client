@@ -1,0 +1,13 @@
+<div id="container">
+  <div id="form">
+    <form (submit)="signIn(mail.value, pass.value)">
+      <label for="mail">mail: </label>
+      <input type="text" id="mail" name="mail" #mail><br>
+
+      <label for="pass">password: </label>
+      <input type="password" id="pass" name="pass" #pass><br>
+
+      <button id="sign-in" type="button" (click)="signIn(mail.value, pass.value)">sign-in</button>
+    </form>
+  </div>
+</div>
