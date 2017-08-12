@@ -13,6 +13,7 @@ import {AuthGuard} from "./services/auth-guard";
 import {LoginService} from "./services/login.service";
 import {UserService} from "./services/user.service";
 import {AlertModule} from "ngx-bootstrap";
+import {EventService} from "./services/event.service";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {AlertModule} from "ngx-bootstrap";
   providers: [
     AuthGuard,
     LoginService,
-    UserService],
+    UserService,
+    EventService],
   bootstrap: [AppComponent]
 })
 export class AppModule

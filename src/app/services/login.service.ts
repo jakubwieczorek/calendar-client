@@ -7,6 +7,7 @@ import {LoginParams} from "../model/LoginParams";
 export class LoginService
 {
   private _logged: boolean;
+  private URL : string = 'http://localhost:8080/calendar/login/';
 
   constructor(private http: Http)
   {
@@ -18,14 +19,15 @@ export class LoginService
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.post('http://localhost:8080/login', JSON.stringify(params), {headers: headers})
+    return this.http.post(this.URL, JSON.stringify(params), {headers: headers})
       .map(res =>
       {
         if(res.status == 200)
         {
           this._logged = true;
-          res.json();
         }
+
+        return res;
       });
   }
 

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Template} from "../util/templates";
 import {TemplateAware} from "../util/templateDec";
+import {User} from "../../model/user";
+import {logger} from "codelyzer/util/logger";
+import * as events from "events";
+import {EventService} from "../../services/event.service";
 
 @Component({
   selector: 'user',
@@ -9,15 +13,25 @@ import {TemplateAware} from "../util/templateDec";
 })
 
 @TemplateAware
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit
+{
+  loggedUser : User;
 
   private _template: Template = Template.SPAN;
-  date: Date = new Date(2016, 5, 7);
+  private _eventService: EventService;
 
-  constructor() {
+  constructor()
+  {
+    this.loggedUser = {firstName: '', mail: '', password: '', surname: '', events: []};
   }
 
-  ngOnInit() {
+  ngOnInit()
+  {
+  }
+
+  retrieveEvents() : void
+  {
+    this._eventService.getEvents(this.loggedUser);
   }
 
   changeValue(aString: string): void

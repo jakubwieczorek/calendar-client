@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit
 
   constructor(private _userService: UserService)
   {
-    this.currentUser = {firstName: '', mail: '', password: '', surname: ''};
+    this.currentUser = {firstName: '', mail: '', password: '', surname: '', events: []};
     this.add = true;
   }
 
@@ -35,7 +35,7 @@ export class AdminComponent implements OnInit
 
   addOrUpdate(firstName: string, mail: string, password: string, surname: string)
   {
-    let user: User = {firstName: firstName, mail: mail, password: password, surname: surname};
+    let user: User = {firstName: firstName, mail: mail, password: password, surname: surname, events: []};
 
     if(this.add)
     {
@@ -52,7 +52,7 @@ export class AdminComponent implements OnInit
 
   private clearUser()
   {
-    this.currentUser = {firstName: '', mail: '', password: '', surname: ''};
+    this.currentUser = {firstName: '', mail: '', password: '', surname: '', events: []};
   }
 
   retrieveUsers()

@@ -8,7 +8,7 @@ export class UserService
 {
   constructor(private http: Http) {}
 
-  private URL : string = 'http://localhost:8080/calendar/users/';
+  private URL : string = 'http://localhost:8080/calendar/admin/';
 
   getUsers()// : Observable<User>
   {
