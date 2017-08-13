@@ -14,6 +14,7 @@ import {LoginService} from "./services/login.service";
 import {UserService} from "./services/user.service";
 import {AlertModule} from "ngx-bootstrap";
 import {EventService} from "./services/event.service";
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import {EventService} from "./services/event.service";
     KeysPipe,
     LoginComponent,
     AdminComponent,
-    UserComponent
+    UserComponent,
   ],
   imports: [
     AlertModule.forRoot(),
@@ -34,7 +35,8 @@ import {EventService} from "./services/event.service";
     AuthGuard,
     LoginService,
     UserService,
-    EventService],
+    EventService,
+    DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule

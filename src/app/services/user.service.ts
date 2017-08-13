@@ -9,11 +9,18 @@ export class UserService
   constructor(private http: Http) {}
 
   private URL : string = 'http://localhost:8080/calendar/admin/';
+  private USER_URL : string = 'http://localhost:8080/calendar/user/';
+
+  getUser(aMail: String)// : Observable<User>
+  {
+    return this.http.get(this.USER_URL + aMail).map(res => res.json());
+      //.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  }
 
   getUsers()// : Observable<User>
   {
-    return this.http.get(this.URL).map(res => res.json())
-      //.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+    return this.http.get(this.URL).map(res => res.json());
+    //.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   addUser(user: User)

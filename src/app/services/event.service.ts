@@ -5,12 +5,12 @@ import {User} from "../model/user";
 @Injectable()
 export class EventService
 {
-  URL: string = 'http://localhost:8080/calendar/events/';
+  URL: string = 'http://localhost:8080/calendar/user/event/';
 
   constructor(private http: Http) {}
 
   getEvents(user: User)
   {
-    return this.http.get(this.URL + user.mail).map(res => {return res.json()});
+    return this.http.get(this.URL + user.mail).map(res => res.json());
   }
 }

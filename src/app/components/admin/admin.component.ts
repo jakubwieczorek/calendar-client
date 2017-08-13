@@ -28,9 +28,10 @@ export class AdminComponent implements OnInit
 
   deleteUser(aMail: string)
   {
-    this._userService.deleteUser(aMail).subscribe(user => this.retrieveUsers());
-
-    this.retrieveUsers();
+    this._userService.deleteUser(aMail).subscribe(() =>
+    {
+      this.retrieveUsers()
+    });
   }
 
   addOrUpdate(firstName: string, mail: string, password: string, surname: string)
@@ -39,7 +40,10 @@ export class AdminComponent implements OnInit
 
     if(this.add)
     {
-      this._userService.addUser(user).subscribe(user => this.retrieveUsers());
+      this._userService.addUser(user).subscribe(() =>
+      {
+        this.retrieveUsers();
+      });
     } else
     {
       this._userService.updateUser(this.usersMail, user).subscribe(user => this.retrieveUsers());
