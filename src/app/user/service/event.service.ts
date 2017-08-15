@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Http} from "@angular/http";
-import {User} from "../model/user";
+import {User} from "../../model/user";
 
 @Injectable()
 export class EventService

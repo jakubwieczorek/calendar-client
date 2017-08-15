@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {LoginService} from "../../services/login.service";
-import {LoginParams} from "../../model/LoginParams";
-import {Router} from "@angular/router";
+import {LoginService} from "./service/login.service";
+import {LoginParams} from "../model/LoginParams";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 
 export class LoginComponent
 {
-  constructor(private _loginService: LoginService, private _router: Router)
+  constructor(private _loginService: LoginService, private _router: Router, private route: ActivatedRoute)
   {}
 
   signIn(mail: string, pass: string)
@@ -23,8 +23,9 @@ export class LoginComponent
      {
        if(res.status == 200)
        {
-         this._router.navigate(["/user"])
+         this._router.navigate(['/user', res.json().mail]);
        }
      });
+
   }
 }

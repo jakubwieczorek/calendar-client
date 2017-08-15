@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from '../../services/user.service';
-import {User} from '../../model/user';
+import {User} from '../model/user';
+import {UserService} from "./service/user.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'admin',
@@ -30,8 +31,10 @@ export class AdminComponent implements OnInit
   {
     this._userService.deleteUser(aMail).subscribe(() =>
     {
-      this.retrieveUsers()
+      this.retrieveUsers();
     });
+
+    this.retrieveUsers();
   }
 
   addOrUpdate(firstName: string, mail: string, password: string, surname: string)
@@ -46,12 +49,14 @@ export class AdminComponent implements OnInit
       });
     } else
     {
-      this._userService.updateUser(this.usersMail, user).subscribe(user => this.retrieveUsers());
+      this._userService.updateUser(this.usersMail, user).subscribe(() => this.retrieveUsers());
 
       this.clearUser();
 
       this.add = true;
     }
+
+    this.retrieveUsers();
   }
 
   private clearUser()

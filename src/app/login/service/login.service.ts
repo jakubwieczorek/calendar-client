@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import {LoginParams} from "../model/LoginParams";
+import {LoginParams} from "../../model/LoginParams";
 
 @Injectable()
 export class LoginService

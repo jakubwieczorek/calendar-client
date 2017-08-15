@@ -1,0 +1,31 @@
+<!--<div id="container">-->
+  <!--<div id="form">-->
+    <!--<form (submit)="signIn(mail.value, pass.value)">-->
+      <!--<label for="mail">mail: </label>-->
+      <!--<input type="text" id="mail" name="mail" #mail><br>-->
+
+      <!--<label for="pass">password: </label>-->
+      <!--<input type="password" id="pass" name="pass" #pass><br>-->
+
+      <!--<button id="sign-in" type="button" (click)="signIn(mail.value, pass.value)">sign-in</button>-->
+    <!--</form>-->
+  <!--</div>-->
+<!--</div>-->
+
+<div class="container">
+
+  <form class="form-signin" (submit)="signIn(mail.value, pass.value)">
+    <!--<h2 class="form-signin-heading">sign in</h2>-->
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" #mail>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" #pass>
+    <!--<div class="checkbox">-->
+      <!--<label>-->
+        <!--<input type="checkbox" value="remember-me"> Remember me-->
+      <!--</label>-->
+    <!--</div>-->
+    <button class="btn btn-lg btn-primary btn-block" type="button" (click)="signIn(mail.value, pass.value)">Sign in</button>
+  </form>
+
+</div> <!-- /container -->
