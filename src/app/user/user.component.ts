@@ -25,13 +25,11 @@ export class UserComponent implements OnInit
   constructor(private _eventService: EventService, private _userService: UserService, private route: ActivatedRoute, private router: Router)
   {
     this.loggedUser = {firstName: '', mail: '', password: '', surname: '', events: []};
-    this.events = [{description: '', eventDate: new Date()}];
+    this.events = [{description: '', eventDate: new Date(), importance: 1}];
   }
 
   ngOnInit()
   {
-    console.log(this.route.snapshot.paramMap.get('mail'));
-
     this.route.paramMap.switchMap((params: ParamMap) =>
       this._userService.getUser(params.get('mail')))
       .subscribe((user: User) =>
@@ -39,9 +37,6 @@ export class UserComponent implements OnInit
         this.loggedUser = user;
         this.retrieveEvents();
       });
-
-    console.log('dupa');
-    console.log(this.loggedUser.mail)
   }
 
   retrieveEvents() : void

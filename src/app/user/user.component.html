@@ -7,6 +7,7 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
+        <span class="navbar-brand">logged as {{loggedUser.mail}}</span>
         <li class="dropdown">
           <a href="http://localhost:1234/user/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -19,21 +20,24 @@
 </nav>
 
 <div class="container">
-
-  <div class="row">
-    <div class="col-md-12">
+  <div class="panel panel-default">
       <table class="table table-bordered">
         <thead>
         <tr class="info">
-          <th></th>
-          <th>Description</th>
-          <th>Date</th>
+          <th class="col-md-1"></th>
+          <th class="col-md-5">Description</th>
+          <th class="col-md-3">Date</th>
+          <th class="col-md-3">Importance</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let event of events">
-          <td class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">1. </a>
+        <tr *ngFor="let event of events; let index = index">
+          <td class="col-md-1" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <a href="">
+                {{index + 1}}. <span class="glyphicon glyphicon-edit"></span>
+              </a>
+            </a>
             <ul class="dropdown-menu">
               <li><a>delete</a></li>
             </ul>
@@ -48,14 +52,26 @@
               <!--</div>-->
             <!--</div>-->
           <!--</td>-->
-          <td>{{event.description}}</td>
-          <td>{{event.eventDate | date:'yyyy-MM-dd'}}</td>
+
+          <td class="col-md-5">{{event.description}}</td>
+          <td class="col-md-3">{{event.eventDate | date:'yyyy-MM-dd'}}</td>
+          <td class="col-md-3">
+            <div [ngSwitch]="event.importance">
+              <div *ngSwitchCase="1" class="p-3 mb-2 bg-success text-success">
+                lazy
+              </div>
+              <div *ngSwitchCase="2" class="p-3 mb-2 bg-warning text-warning">
+                important
+              </div>
+              <div *ngSwitchCase="3" class="p-3 mb-2 bg-danger text-danger">
+                very important
+              </div>
+            </div>
+          </td>
         </tr>
         </tbody>
       </table>
-    </div><!--/.col-md-10-->
-  </div><!--/row-->
-
+  </div>
   <hr />
 
   <div class="panel panel-default">
@@ -65,12 +81,20 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-md-4">
-          <label for="description" class="control-label">Description</label>
-          <textarea class="form-control" rows="2" maxlength="50" id="description"></textarea>
+          <label for="description" class="control-label">Description:</label>
+          <textarea class="form-control" rows="1" maxlength="50" id="description"></textarea>
         </div>
         <div class="col-md-4">
-          <label for="event_date" class="control-label">Event date</label>
+          <label for="event_date" class="control-label">Event date:</label>
           <input class="form-control" id="event_date" name="date" placeholder="/DD/MM/YYYY" type="date"/>
+        </div>
+        <div class="form-group" class="col-md-4">
+          <label for="sel1">Select importance:</label>
+          <select class="form-control" id="sel1">
+            <option class="p-3 mb-2 bg-success text-white">lazy</option>
+            <option class="p-3 mb-2 bg-danger text-white">very important</option>
+            <option class="p-3 mb-2 bg-warning text-white">important</option>
+          </select>
         </div>
       </div>
 
