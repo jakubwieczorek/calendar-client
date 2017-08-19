@@ -2,11 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {Template} from "../util/templates";
 import {TemplateAware} from "../util/templateDec";
 import {User} from "../model/user";
-import {Event} from "../model/event";
+import {Event} from "./model/event";
 import {EventService} from "./service/event.service";
 import {UserService} from "../admin/service/user.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import 'rxjs/add/operator/switchMap';
+import {ValuesProvider} from "./service/ValuesParser";
 
 @Component({
   selector: 'user',
@@ -25,7 +26,6 @@ export class UserComponent implements OnInit
   constructor(private _eventService: EventService, private _userService: UserService, private route: ActivatedRoute, private router: Router)
   {
     this.loggedUser = {firstName: '', mail: '', password: '', surname: '', events: []};
-    this.events = [{description: '', eventDate: new Date(), importance: 1}];
   }
 
   ngOnInit()
@@ -43,6 +43,16 @@ export class UserComponent implements OnInit
   {
     this._eventService.getEvents(this.loggedUser).subscribe((events: Event []) =>
       this.events = events);
+  }
+
+  addEvent(aDescription: string, aDate: Date, aImportance: string)
+  {
+    let event: Event = {description: aDescription, eventDate: aDate
+      , importance: ValuesProvider.getImportanceValue(aImportance)};
+
+    this._eventService.addEvent(event, this.loggedUser.mail).subscribe(() =>
+      this.retrieveEvents()
+    );
   }
 
   changeValue(aString: string): void

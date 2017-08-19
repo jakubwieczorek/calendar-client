@@ -13,14 +13,12 @@ export class UserService
 
   getUser(aMail: String)// : Observable<User>
   {
-    return this.http.get(this.USER_URL + aMail).map(res => res.json());
-      //.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+    return this.http.get(this.USER_URL + aMail).map(res => this.extractData(res));
   }
 
   getUsers()// : Observable<User>
   {
-    return this.http.get(this.URL).map(res => res.json());
-    //.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+    return this.http.get(this.URL).map(res => this.extractData(res));
   }
 
   addUser(user: User)
@@ -29,12 +27,12 @@ export class UserService
     headers.append('Content-Type', 'application/json');
 
     return this.http.post(this.URL, JSON.stringify(user), {headers: headers})
-      .map(res => res.json());
+      .map(() => {});
   }
 
   deleteUser(aMail: string)
   {
-    return this.http.delete(this.URL + aMail).map(res => res.json());
+    return this.http.delete(this.URL + aMail).map(() => {});
   }
 
   updateUser(mail: string, user: User)
@@ -42,7 +40,12 @@ export class UserService
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.put(this.URL + mail, JSON.stringify(user),
-      {headers: headers}).map(res => res.json());
+    return this.http.put(this.URL + mail, JSON.stringify(user || null),
+      {headers: headers}).map(() => {});
+  }
+
+  private extractData(res)
+  {
+    return res.text() ? res.json() : {};
   }
 }
