@@ -47,10 +47,17 @@ export class UserComponent implements OnInit
 
   addEvent(aDescription: string, aDate: Date, aImportance: string)
   {
-    let event: Event = {description: aDescription, eventDate: aDate
+    let event: Event = {description: aDescription, eventDate: new Date(aDate)
       , importance: ValuesProvider.getImportanceValue(aImportance)};
 
     this._eventService.addEvent(event, this.loggedUser.mail).subscribe(() =>
+      this.retrieveEvents()
+    );
+  }
+
+  deleteEvent(aEvent: Event)
+  {
+    this._eventService.deleteEvent(aEvent, this.loggedUser.mail).subscribe(() =>
       this.retrieveEvents()
     );
   }
