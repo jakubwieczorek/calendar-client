@@ -27,7 +27,7 @@ export class UserService
     headers.append('Content-Type', 'application/json');
 
     return this.http.post(this.URL, JSON.stringify(user), {headers: headers})
-      .map(() => {});
+      .map((res) => this.extractData(res));
   }
 
   deleteUser(aMail: string)

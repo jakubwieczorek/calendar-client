@@ -6,16 +6,12 @@ import {AuthGuard} from "./services/auth-guard";
 const appRoutes: Routes =
   [
     {
-      path: 'login',
-      component: LoginComponent
-    },
-    {
       path: '**',
-      redirectTo: 'login',
+      redirectTo: 'home',
     },
     {
       path: '',
-      redirectTo: 'login',
+      redirectTo: 'home',
       pathMatch: 'full'
     }
   ];

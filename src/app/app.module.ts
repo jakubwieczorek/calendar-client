@@ -16,6 +16,8 @@ import {DatePipe} from "@angular/common";
 import {AdminModule} from "./admin/admin.module";
 import {LoginModule} from "./login/login.module";
 import {UserModule} from "./user/user.module";
+import {RegisterModule} from "./register/register.module";
+import {HomeModule} from "./home/home.module";
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import {UserModule} from "./user/user.module";
     LoginModule,
     AdminModule,
     UserModule,
+    RegisterModule,
+    HomeModule,
     AppRoutingModule
   ],
   providers: [

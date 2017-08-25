@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="page-header">
+    <h1>Calendar</h1>
+  </div>
+
+  <form class="form-horizontal" id="registerForm">
+    <div class="form-group error">
+      <label class="control-label col-sm-offset-2 col-sm-2" for="firstName">First name:</label>
+      <div class="col-sm-4">
+        <input type="text" id="firstName" class="form-control" #firstName>
+      </div>
+    </div>
+
+    <div class="form-group error">
+      <label class="control-label col-sm-offset-2 col-sm-2" for="surname">surname:</label>
+      <div class="col-sm-4">
+        <input type="text" id="surname" class="form-control" #surname>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-offset-2 col-sm-2" for="inputEmail">Email address:</label>
+      <div class="col-sm-4">
+        <input type="email" id="inputEmail" class="form-control" #mail>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-offset-2 col-sm-2" for="inputPassword">Password:</label>
+      <div class="col-sm-4">
+        <input type="password" id="inputPassword" class="form-control" #pass>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-4 col-sm-4">
+        <button class="btn btn-lg btn-primary btn-block" type="button" (click)="register(firstName.value, mail.value, pass.value, surname.value)">Sign up</button>
+      </div>
+    </div>
+  </form>
+
+</div> <!-- /container -->
