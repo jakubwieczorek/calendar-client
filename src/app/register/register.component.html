@@ -4,25 +4,51 @@
   </div>
 
   <form class="form-horizontal" id="registerForm">
-    <div class="form-group error">
+    <div class="form-group">
       <label class="control-label col-sm-offset-2 col-sm-2" for="firstName">First name:</label>
       <div class="col-sm-4">
-        <input type="text" id="firstName" class="form-control" #firstName>
+        <input type="text" class="form-control" id="firstName" [(ngModel)]="userData.firstName" name="firstName" #firstName="ngModel">
       </div>
     </div>
 
-    <div class="form-group error">
+    <div class="form-group ">
       <label class="control-label col-sm-offset-2 col-sm-2" for="surname">surname:</label>
       <div class="col-sm-4">
         <input type="text" id="surname" class="form-control" #surname>
       </div>
     </div>
 
-    <div class="form-group">
-      <label class="control-label col-sm-offset-2 col-sm-2" for="inputEmail">Email address:</label>
+    <div class="form-group has-feedback">
+      <label class="control-label col-sm-offset-2 col-sm-2" for="mail">Email address:</label>
       <div class="col-sm-4">
-        <input type="email" id="inputEmail" class="form-control" #mail>
-      </div>
+        <input type="email" class="form-control" id="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required [(ngModel)]="userData.mail" (input)="checkBusy()" name="mail" #mail="ngModel">
+        <div *ngIf="mail.errors && mail.dirty">
+          <div [hidden]="!mail.errors.required" class="alert alert-danger">
+            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+            This field is required
+          </div>
+          <div [hidden]="!mail.errors.pattern" class="alert alert-danger">
+            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+            Not valid email
+          </div>
+          <!--<div [hidden]="!isBusy(userData.firstName)">-->
+          <!--<span class="glyphicon glyphicon-remove form-control-feedback"></span>-->
+          <!--First name is required !-->
+          <!--</div>-->
+          <!--<div [hidden]="!isBusy(userData.firstName)">-->
+          <!--<span class="glyphicon glyphicon-remove form-control-feedback"></span>-->
+          <!--First name is required !-->
+          <!--</div>-->
+        </div>
+        <div *ngIf="!mail.errors && mail.dirty">
+          <div [hidden]="isMailBusy.valueOf() != false" class="alert-success">
+            <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+          </div>
+          <div [hidden]="isMailBusy.valueOf() != true" class="alert-danger">
+            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+          </div>
+        </div>
+        </div>
     </div>
 
     <div class="form-group">

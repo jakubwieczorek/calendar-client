@@ -4,6 +4,8 @@ import {RegisterComponent} from "./register.component";
 import {FormsModule} from "@angular/forms";
 import {RegisterRoutingModule} from "./register-routing.module";
 import {UserService} from "../admin/service/user.service";
+import {RegisterService} from "./register.service";
+import {GenericService} from "../common/generic.service";
 
 @NgModule({
   imports: [
@@ -13,7 +15,9 @@ import {UserService} from "../admin/service/user.service";
   ],
   declarations: [RegisterComponent],
   providers: [
-    UserService
+    UserService,
+    RegisterService,
+    GenericService
   ]
 })
 export class RegisterModule { }
