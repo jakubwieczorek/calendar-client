@@ -12,6 +12,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 export class LoginComponent
 {
+  mConflict: boolean;
+
   constructor(private _loginService: LoginService, private _router: Router, private route: ActivatedRoute)
   {}
 
@@ -24,6 +26,9 @@ export class LoginComponent
        if(res.status == 200)
        {
          this._router.navigate(['/user', res.json().mail]);
+       } else if(res.status == 204)
+       {
+         this.mConflict = true;
        }
      });
 

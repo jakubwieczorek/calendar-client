@@ -1,9 +1,26 @@
-<div class="container">
-  <div class="page-header">
-    <h1>Calendar</h1>
-  </div>
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
 
-  <form class="form-horizontal" id="registerForm">
+    <div class="navbar-header">
+      <span class="navbar-brand">Calendar</span>
+    </div>
+
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/home">Home</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="/register"><span class="glyphicon glyphicon-user active"></span> Sign Up</a></li>
+        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Sign In</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</nav>
+
+<div class="container">
+
+  <form class="form-horizontal" id="registerForm" (ngSubmit)="register(firstName.value, mail.value, pass.value, surname.value)" #registerForm="ngForm">
     <div class="form-group">
       <label class="control-label col-sm-offset-2 col-sm-2" for="firstName">First name:</label>
       <div class="col-sm-4">
@@ -19,50 +36,48 @@
     </div>
 
     <div class="form-group has-feedback">
-      <label class="control-label col-sm-offset-2 col-sm-2" for="mail">Email address:</label>
+      <label class="control-label col-sm-offset-2 col-sm-2" for="mail">* Email address:</label>
       <div class="col-sm-4">
         <input type="email" class="form-control" id="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required [(ngModel)]="userData.mail" (input)="checkBusy()" name="mail" #mail="ngModel">
-        <div *ngIf="mail.errors && mail.dirty">
-          <div [hidden]="!mail.errors.required" class="alert alert-danger">
-            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-            This field is required
+          <div *ngIf="mail.errors && mail.dirty">
+            <div [hidden]="!mail.errors.required" class="alert alert-danger">
+              This field is required
+            </div>
+            <div [hidden]="!mail.errors.pattern" class="alert alert-danger">
+              <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+              Not valid email
+            </div>
           </div>
-          <div [hidden]="!mail.errors.pattern" class="alert alert-danger">
-            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-            Not valid email
+          <div *ngIf="!mail.errors && mail.dirty">
+            <div [hidden]="isMailBusy.valueOf() != false" class="alert-success">
+              <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+            </div>
+            <div [hidden]="isMailBusy.valueOf() != true" class="alert-danger">
+              <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+            </div>
           </div>
-          <!--<div [hidden]="!isBusy(userData.firstName)">-->
-          <!--<span class="glyphicon glyphicon-remove form-control-feedback"></span>-->
-          <!--First name is required !-->
-          <!--</div>-->
-          <!--<div [hidden]="!isBusy(userData.firstName)">-->
-          <!--<span class="glyphicon glyphicon-remove form-control-feedback"></span>-->
-          <!--First name is required !-->
-          <!--</div>-->
-        </div>
-        <div *ngIf="!mail.errors && mail.dirty">
-          <div [hidden]="isMailBusy.valueOf() != false" class="alert-success">
-            <span class="glyphicon glyphicon-ok form-control-feedback"></span>
-          </div>
-          <div [hidden]="isMailBusy.valueOf() != true" class="alert-danger">
-            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-          </div>
-        </div>
         </div>
     </div>
 
     <div class="form-group">
-      <label class="control-label col-sm-offset-2 col-sm-2" for="inputPassword">Password:</label>
+      <label class="control-label col-sm-offset-2 col-sm-2" for="inputPassword">* Password:</label>
       <div class="col-sm-4">
-        <input type="password" id="inputPassword" class="form-control" #pass>
+        <input type="password" id="inputPassword" class="form-control" [(ngModel)]="userData.password" required name="pass" #pass="ngModel">
+        <div *ngIf="pass.errors && pass.dirty">
+          <div [hidden]="!pass.errors.required" class="alert alert-danger">
+            This field is required
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="form-group">
       <div class="col-sm-offset-4 col-sm-4">
-        <button class="btn btn-lg btn-primary btn-block" type="button" (click)="register(firstName.value, mail.value, pass.value, surname.value)">Sign up</button>
+        <button class="btn btn-lg btn-primary btn-block" type="button" (click)="register(firstName.value, mail.value, pass.value, surname.value)" [disabled]="!registerForm.form.valid">Sign up</button><!--[disabled]="!heroForm.form.valid"-->
+        <p>* fields are required</p>
       </div>
     </div>
+    <br>
   </form>
 
 </div> <!-- /container -->

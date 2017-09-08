@@ -13,13 +13,14 @@ import {GenericService} from "../common/generic.service";
 })
 export class RegisterComponent implements OnInit
 {
+  mSignUpClicked: Boolean;
   userData: User;
   isMailBusy: Boolean;
 
   constructor(private _userService: UserService, private _router: Router, private _registerService: RegisterService)
   {
     this.isMailBusy = false;
-
+    this.mSignUpClicked = false;
     this.userData = {firstName: "", surname: "", events: [], password: "", mail: ""};
   }
 
@@ -44,11 +45,13 @@ export class RegisterComponent implements OnInit
 
   register(aFirstName: string, aMail: string, aPassword: string, aSurname: string)
   {
-    let user: User = {firstName: aFirstName, mail: aMail, password: aPassword, surname: aSurname, events: []};
+    this.mSignUpClicked = true;
 
-    this._userService.addUser(user).subscribe(res =>
-    {
-      this._router.navigate(['/user', this.userData.mail]);
-    });
+    this.userData = {firstName: aFirstName, mail: aMail, password: aPassword, surname: aSurname, events: []};
+
+      this._userService.addUser(this.userData).subscribe(res =>
+      {
+        this._router.navigate(['/user', this.userData.mail]);
+      });
   }
 }

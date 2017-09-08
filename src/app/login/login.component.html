@@ -1,21 +1,24 @@
-<!--<div id="container">-->
-  <!--<div id="form">-->
-    <!--<form (submit)="signIn(mail.value, pass.value)">-->
-      <!--<label for="mail">mail: </label>-->
-      <!--<input type="text" id="mail" name="mail" #mail><br>-->
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
 
-      <!--<label for="pass">password: </label>-->
-      <!--<input type="password" id="pass" name="pass" #pass><br>-->
+    <div class="navbar-header">
+      <span class="navbar-brand">Calendar</span>
+    </div>
 
-      <!--<button id="sign-in" type="button" (click)="signIn(mail.value, pass.value)">sign-in</button>-->
-    <!--</form>-->
-  <!--</div>-->
-<!--</div>-->
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/home">Home</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li class="active"><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Sign In</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</nav>
 
 <div class="container">
-  <div class="page-header">
-    <h1>Calendar</h1>
-  </div>
 
   <form class="form-signin" (submit)="signIn(mail.value, pass.value)">
     <!--<h2 class="form-signin-heading">sign in</h2>-->
@@ -29,6 +32,11 @@
       <!--</label>-->
     <!--</div>-->
     <button class="btn btn-lg btn-primary btn-block" type="button" (click)="signIn(mail.value, pass.value)">Sign in</button>
+
+    <br>
+    <div *ngIf="mConflict == true" class="alert-danger alert">
+      Wrong email or password
+    </div>
   </form>
 
 </div> <!-- /container -->
