@@ -6,8 +6,9 @@ import {LoginParams} from "../../model/LoginParams";
 @Injectable()
 export class LoginService
 {
-  private _logged: boolean;
+  _logged: boolean;
   private URL : string = 'http://localhost:8080/calendar/login/';
+  redirectUrl: string;
 
   constructor(private http: Http)
   {

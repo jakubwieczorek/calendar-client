@@ -7,7 +7,6 @@ import {ActivatedRoute, Router} from "@angular/router";
   selector: 'admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
-  providers: [UserService]
 })
 export class AdminComponent implements OnInit
 {

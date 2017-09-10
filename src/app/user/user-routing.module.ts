@@ -1,12 +1,20 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {UserComponent} from "./user.component";
+import {AuthGuard} from "../common/auth-guard";
 
 const userRoutes: Routes =
   [
     {
-      path: 'user/:mail',
-      component: UserComponent
+      path: 'user',
+      canActivate: [AuthGuard],
+      children :
+      [
+        {
+          path: ':mail',
+          component: UserComponent,
+        }
+      ]
     }
   ];
 

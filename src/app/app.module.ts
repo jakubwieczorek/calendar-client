@@ -8,7 +8,7 @@ import {LoginComponent} from "./login/login.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {HttpModule} from "@angular/http";
 import {FormsModule} from "@angular/forms";
-import {AuthGuard} from "./services/auth-guard";
+import {AuthGuard} from "./common/auth-guard";
 import {LoginService} from "./login/service/login.service";
 import {AlertModule} from "ngx-bootstrap";
 import {EventService} from "./user/service/event.service";
@@ -37,8 +37,8 @@ import {HomeModule} from "./home/home.module";
     AppRoutingModule
   ],
   providers: [
-    AuthGuard,
     EventService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

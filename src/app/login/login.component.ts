@@ -6,15 +6,14 @@ import {ActivatedRoute, Router} from "@angular/router";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  providers: [LoginService]
+  styleUrls: ['./login.component.css']
 })
 
 export class LoginComponent
 {
   mConflict: boolean;
 
-  constructor(private _loginService: LoginService, private _router: Router, private route: ActivatedRoute)
+  constructor(private _loginService: LoginService, private _router: Router)
   {}
 
   signIn(mail: string, pass: string)
@@ -25,7 +24,12 @@ export class LoginComponent
      {
        if(res.status == 200)
        {
+         this._loginService._logged = true;
+
+         console.log("LoginComponent " + this._loginService._logged);
+         //console.log("LoginComponent " + this._loginService.redirectUrl);
          this._router.navigate(['/user', res.json().mail]);
+         // this._router.navigate([this._loginService.redirectUrl]);
        } else if(res.status == 204)
        {
          this.mConflict = true;
